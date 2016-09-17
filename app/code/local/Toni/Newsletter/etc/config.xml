@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Toni_Newsletter>
+            <version>1.0.0.0</version>
+        </Toni_Newsletter>
+    </modules>
+
+    <adminhtml>
+        <events>
+            <core_layout_block_create_after>
+                <observers>
+                    <toni_newsletter_after_block>
+                        <type>singleton</type>
+                        <class>Toni_Newsletter_Model_Observer</class>
+                        <method>blockAfterCreate</method>
+                    </toni_newsletter_after_block>
+                </observers>
+            </core_layout_block_create_after>
+        </events>
+    </adminhtml>
+
+    <global>
+        <resources>
+            <toni_newsletter_setup>
+                <setup>
+                    <module>Toni_Newsletter</module>
+                </setup>
+            </toni_newsletter_setup>
+        </resources>
+
+        <events>
+            <newsletter_subscriber_save_before>
+                <observers>
+                    <toni_newsletter_observer_subscriber>
+                        <type>singleton</type>
+                        <class>Toni_Newsletter_Model_Observer</class>
+                        <method>setDates</method>
+                    </toni_newsletter_observer_subscriber>
+                </observers>
+            </newsletter_subscriber_save_before>
+        </events>
+    </global>
+</config>
